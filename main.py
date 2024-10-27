@@ -80,7 +80,10 @@ class AlumnoResource(Resource):
     def delete(self, id):
         global alumnos
         alumnos = [alumno for alumno in alumnos if alumno.id != id]
-        return {"mensaje": "Alumno eliminado exitosamente"}, 200
+        for alumno in alumnos:
+            if alumno.id == id:
+                return {"mensaje": "Alumno eliminado exitosamente"}, 200
+        return {"error": "Alumno no encontrado"}, 404
 
 class ProfesorResource(Resource):
     def get(self, id=None):
@@ -114,7 +117,11 @@ class ProfesorResource(Resource):
     def delete(self, id):
         global profesores
         profesores = [profesor for profesor in profesores if profesor.id != id]
-        return {"mensaje": "Profesor eliminado exitosamente"}, 200
+        for profesor in profesores:
+            if profesor.id == id:
+                return {"mensaje": "Profesor eliminado exitosamente"}, 200
+        return {"error": "Profesor no encontrado"}, 404
+        
 
 # Endpoint Routing
 api.add_resource(AlumnoResource, "/alumnos", "/alumnos/<int:id>")
