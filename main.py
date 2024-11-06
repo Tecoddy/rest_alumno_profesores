@@ -32,10 +32,6 @@ def validate_alumno(data):
     for field in required_fields:
         if field not in data or not data[field]:
             return f"El campo '{field}' es obligatorio y no puede estar vacío."
-        if field in ["id", "matricula"] and not isinstance(data[field], int):
-            return f"El campo '{field}' debe ser un entero."
-        if field == "promedio" and not isinstance(data[field], (int, float)):
-            return f"El campo 'promedio' debe ser un número."
     return None
 
 def validate_profesor(data):
@@ -43,8 +39,6 @@ def validate_profesor(data):
     for field in required_fields:
         if field not in data or not data[field]:
             return f"El campo '{field}' es obligatorio y no puede estar vacío."
-        if field in ["id", "numero_empleado", "horas_clase"] and not isinstance(data[field], int):
-            return f"El campo '{field}' debe ser un entero."
     return None
 
 # Resources
@@ -77,7 +71,9 @@ class AlumnoResource(Resource):
                 return {"mensaje": "Alumno actualizado exitosamente"}, 200
         return {"error": "Alumno no encontrado"}, 404
 
-    def delete(self, id):
+    def delete(self, id=None):
+        if id is None:
+            return {"error": "No permitido"}, 405
         global alumnos
         for alumno in alumnos:
             if alumno.id == id:
@@ -113,8 +109,11 @@ class ProfesorResource(Resource):
                 profesores[i] = Profesor(**data)
                 return {"mensaje": "Profesor actualizado exitosamente"}, 200
         return {"error": "Profesor no encontrado"}, 404
+    
 
-    def delete(self, id):
+    def delete(self, id=None):
+        if id is None:
+            return {"error": "No permitido"}, 405
         global profesores
         for profesor in profesores:
             if profesor.id == id:
