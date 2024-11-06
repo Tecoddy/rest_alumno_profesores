@@ -19,12 +19,12 @@ class Alumno:
         self.promedio = promedio
 
 class Profesor:
-    def __init__(self, id, numero_empleado, nombres, apellidos, horas_clase):
+    def __init__(self, id, numeroEmpleado, nombres, apellidos, horasClase):
         self.id = id
-        self.numero_empleado = numero_empleado
+        self.numeroEmpleado = numeroEmpleado
         self.nombres = nombres
         self.apellidos = apellidos
-        self.horas_clase = horas_clase
+        self.horasClase = horasClase
 
 # Helper functions for validations
 def validate_alumno(data):
