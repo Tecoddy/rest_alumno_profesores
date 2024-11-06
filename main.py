@@ -35,7 +35,7 @@ def validate_alumno(data):
     return None
 
 def validate_profesor(data):
-    required_fields = ["id", "numero_empleado", "nombres", "apellidos", "horas_clase"]
+    required_fields = ["id", "numeroEmpleado", "nombres", "apellidos", "horasClase"]
     for field in required_fields:
         if field not in data or not data[field]:
             return f"El campo '{field}' es obligatorio y no puede estar vacío."
