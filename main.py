@@ -16,6 +16,8 @@ api = Api(app)
 
 # EC2 instance DNS
 BASE_URL = "http://ec2-54-144-75-112.compute-1.amazonaws.com"
+#Testing
+#BASE_URL = "http://127.0.0.1:5000"
 
 # Database Endpoint and Credentials
 endpoint = "rest-database.cluster-cw4mgxm6dnhr.us-east-1.rds.amazonaws.com"
@@ -34,16 +36,16 @@ db = SQLAlchemy(app)
 
 # Modelos
 class Alumno(db.Model):
-    id = db.Column(db.Integer, primary_key=True, default=lambda: uuid.uuid4().int)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
     matricula = db.Column(db.String(50), nullable=False)
     promedio = db.Column(db.Float, nullable=False)
     fotoPerfilUrl = db.Column(db.String(255), nullable=True)
-    password = db.Column(db.String(128), nullable=True)
+    password = db.Column(db.String(128), nullable=False)
 
 class Profesor(db.Model):
-    id = db.Column(db.Integer, primary_key=True, default=lambda: uuid.uuid4().int)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     numeroEmpleado = db.Column(db.String(50), nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)

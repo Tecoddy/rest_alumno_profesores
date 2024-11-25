@@ -12,7 +12,8 @@ def test_alumnos():
         "nombres": "Juan",
         "apellidos": "Pérez",
         "matricula": "A001",
-        "promedio": 9.5
+        "promedio": 9.5,
+        "password": "securepassword"  # Ensure this matches your password hashing setup
     }
     response = requests.post(f"{BASE_URL}/alumnos", json=alumno_data)
     print("POST /alumnos:", response.json())
@@ -101,7 +102,8 @@ def test_enviar_email():
         "nombres": "Juan",
         "apellidos": "Pérez",
         "matricula": "A001",
-        "promedio": 9.5
+        "promedio": 9.5,
+        "password": "securepassword"  # Ensure this matches your password hashing setup
     }
     response = requests.post(f"{BASE_URL}/alumnos", json=alumno_data)
     alumno_id = response.json()["id"]
