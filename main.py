@@ -14,6 +14,9 @@ import aws_services
 app = Flask(__name__)
 api = Api(app)
 
+# EC2 instance DNS
+BASE_URL = "http://ec2-54-144-75-112.compute-1.amazonaws.com"
+
 # Database Endpoint and Credentials
 endpoint = "rest-database.cluster-cw4mgxm6dnhr.us-east-1.rds.amazonaws.com"
 username = "admin"

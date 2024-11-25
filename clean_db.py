@@ -1,10 +1,10 @@
 import requests
 import sys
 from main import db
+from main import BASE_URL
 
 # Base URL of the EC2 instance
-base_url = "http://127.0.0.1:5000"
-
+base_url = BASE_URL
 def clean_database():
     """
     Sends a POST request to the clean database endpoint.
