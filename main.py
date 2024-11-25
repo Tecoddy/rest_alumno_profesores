@@ -32,7 +32,7 @@ db = SQLAlchemy(app)
 
 # Modelos
 class Alumno(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, default=uuid.uuid4().int)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
     matricula = db.Column(db.String(50), nullable=False)
@@ -41,7 +41,7 @@ class Alumno(db.Model):
     password = db.Column(db.String(128), nullable=True)
 
 class Profesor(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, default=uuid.uuid4().int)
     numeroEmpleado = db.Column(db.String(50), nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
