@@ -1,4 +1,3 @@
-import random
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
@@ -31,15 +30,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
-
-def getRandomId():
-        return random.randint(1,1000000)
-    
-
 # Modelos
 class Alumno(db.Model):
-    id = db.Column(db.Integer, primary_key=True, default=getRandomId())
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
     matricula = db.Column(db.String(50), nullable=False)
@@ -48,7 +41,7 @@ class Alumno(db.Model):
     password = db.Column(db.String(128), nullable=True)
 
 class Profesor(db.Model):
-    id = db.Column(db.String(36), primary_key=True, default=getRandomId())
+    id = db.Column(db.String(36), primary_key=True, autoincrement=True)
     numeroEmpleado = db.Column(db.String(50), nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
@@ -346,5 +339,3 @@ def handle_exception(e):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
