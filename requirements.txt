@@ -4,4 +4,3 @@ flask-sqlalchemy
 boto3
 PyMySQL
 bcrypt
-snowflake-id

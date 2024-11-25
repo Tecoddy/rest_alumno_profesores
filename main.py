@@ -8,7 +8,6 @@ import bcrypt
 
 import boto3
 from botocore.exceptions import NoCredentialsError
-from snowflake_id import SnowflakeGenerator
 
 import aws_services
 
@@ -31,12 +30,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = (
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Initialize the generator with a worker ID
-generator = SnowflakeGenerator(worker_id=1)
+
 
 # Modelos
 class Alumno(db.Model):
-    id = db.Column(db.Integer, primary_key=True, default=lambda: generator.next_id())
+    id = db.Column(db.Integer, primary_key=True, default=lambda: uuid.uuid4().int)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
     matricula = db.Column(db.String(50), nullable=False)
@@ -45,7 +43,7 @@ class Alumno(db.Model):
     password = db.Column(db.String(128), nullable=True)
 
 class Profesor(db.Model):
-    id = db.Column(db.Integer, primary_key=True, default=lambda: generator.next_id())
+    id = db.Column(db.Integer, primary_key=True, default=lambda: uuid.uuid4().int)
     numeroEmpleado = db.Column(db.String(50), nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
