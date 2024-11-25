@@ -184,15 +184,15 @@ def upload_foto_perfil(id):
     if not alumno:
         return {"error": "Alumno no encontrado"}, 404
 
-    # Validate that a file is provided
-    if 'fotoPerfil' not in request.files:
-        return {"error": "No se encontró el archivo 'fotoPerfil' en la solicitud"}, 400
+    # Validate that a file is provided with the key 'foto'
+    if 'foto' not in request.files:
+        return {"error": "No se encontró el archivo 'foto' en la solicitud"}, 400
 
-    file = request.files['fotoPerfil']
+    file = request.files['foto']
     if file.filename == '':
         return {"error": "El archivo no tiene un nombre válido"}, 400
 
-    # Determine content type
+    # Determine the content type
     content_type = file.content_type or mimetypes.guess_type(file.filename)[0] or 'application/octet-stream'
 
     # Create a unique filename for S3
@@ -206,6 +206,7 @@ def upload_foto_perfil(id):
         alumno.fotoPerfilUrl = file_url
         db.session.commit()
 
+        # Return the file URL in the response
         return {"mensaje": "Foto de perfil subida exitosamente", "fotoPerfilUrl": file_url}, 200
     except NoCredentialsError:
         return {"error": "Credenciales de AWS no configuradas correctamente"}, 500
