@@ -47,6 +47,33 @@ class Profesor(db.Model):
     apellidos = db.Column(db.String(100), nullable=False)
     horasClase = db.Column(db.Integer, nullable=False)
 
+# Helper functions for validations
+def validate_alumno(data):
+    required_fields = ["id", "nombres", "apellidos", "matricula", "promedio"]
+    for field in required_fields:
+        if field not in data or not data[field]:
+            return f"El campo '{field}' es obligatorio y no puede estar vacío."
+        if field in ["id"] and not isinstance(data[field], int):
+            return f"El campo '{field}' debe ser un entero."
+        if field in ["nombres", "apellidos", "matricula"] and not isinstance(data[field], str):
+            return f"El campo '{field}' debe ser un string."
+        if field == "promedio" and not isinstance(data[field], (int, float)):
+            return f"El campo 'promedio' debe ser un número."
+    return None
+
+def validate_profesor(data):
+    required_fields = ["id", "numeroEmpleado", "nombres", "apellidos", "horasClase"]
+    for field in required_fields:
+        if field not in data or not data[field]:
+            return f"El campo '{field}' es obligatorio y no puede estar vacío."
+        if field in ["id"] and not isinstance(data[field], int):
+            return f"El campo '{field}' debe ser un entero."
+        if field in ["nombres", "apellidos"] and not isinstance(data[field], str):
+            return f"El campo '{field}' debe ser un string."
+        if field in ["promedio","horasClase"] and not isinstance(data[field], (int, float)):
+            return f"El campo 'promedio' debe ser un número."
+    return None
+
 # Crear la base de datos
 with app.app_context():
     db.create_all()
@@ -76,6 +103,9 @@ class AlumnoResource(Resource):
 
     def post(self):
         data = request.get_json()
+        error = validate_alumno(data)
+        if error:
+            return {"error": error}, 400
         new_alumno = Alumno(**data)
         db.session.add(new_alumno)
         db.session.commit()
@@ -83,6 +113,9 @@ class AlumnoResource(Resource):
 
     def put(self, id):
         data = request.get_json()
+        error = validate_alumno(data)
+        if error:
+            return {"error": error}, 400
         alumno = Alumno.query.get(id)
         if not alumno:
             return {"error": "Alumno no encontrado"}, 404
@@ -111,6 +144,9 @@ class ProfesorResource(Resource):
 
     def post(self):
         data = request.get_json()
+        error = validate_alumno(data)
+        if error:
+            return {"error": error}, 400
         new_profesor = Profesor(**data)
         db.session.add(new_profesor)
         db.session.commit()
@@ -118,6 +154,9 @@ class ProfesorResource(Resource):
 
     def put(self, id):
         data = request.get_json()
+        error = validate_alumno(data)
+        if error:
+            return {"error": error}, 400
         profesor = Profesor.query.get(id)
         if not profesor:
             return {"error": "Profesor no encontrado"}, 404
