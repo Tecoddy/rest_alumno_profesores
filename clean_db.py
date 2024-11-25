@@ -2,7 +2,10 @@ import requests
 import sys
 from main import db
 
-def clean_database(base_url):
+# Base URL of the EC2 instance
+base_url = "http://127.0.0.1:5000"
+
+def clean_database():
     """
     Sends a POST request to the clean database endpoint.
     """
@@ -34,11 +37,10 @@ if __name__ == "__main__":
         print("Actions: clean or reset")
         sys.exit(1)
 
-    base_url = sys.argv[1]
     action = sys.argv[2].lower()
 
     if action == "clean":
-        clean_database(base_url)
+        clean_database()
     elif action == "reset":
         reset_database()
     else:
