@@ -35,14 +35,14 @@ class Alumno(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
-    matricula = db.Column(db.String(50), unique=True, nullable=False)
+    matricula = db.Column(db.String(50), nullable=False)
     promedio = db.Column(db.Float, nullable=False)
     fotoPerfilUrl = db.Column(db.String(255), nullable=True)
     password = db.Column(db.String(128), nullable=True)
 
 class Profesor(db.Model):
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    numeroEmpleado = db.Column(db.String(50), unique=True, nullable=False)
+    numeroEmpleado = db.Column(db.String(50), nullable=False)
     nombres = db.Column(db.String(100), nullable=False)
     apellidos = db.Column(db.String(100), nullable=False)
     horasClase = db.Column(db.Integer, nullable=False)
