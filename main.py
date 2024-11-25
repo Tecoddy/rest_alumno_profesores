@@ -49,26 +49,22 @@ class Profesor(db.Model):
 
 # Helper functions for validations
 def validate_alumno(data):
-    required_fields = ["id", "nombres", "apellidos", "matricula", "promedio"]
+    required_fields = ["password", "nombres", "apellidos", "matricula", "promedio"]
     for field in required_fields:
         if field not in data or not data[field]:
             return f"El campo '{field}' es obligatorio y no puede estar vacío."
-        if field in ["id"] and not isinstance(data[field], int):
-            return f"El campo '{field}' debe ser un entero."
-        if field in ["nombres", "apellidos", "matricula"] and not isinstance(data[field], str):
+        if field in ["nombres", "apellidos", "matricula","password"] and not isinstance(data[field], str):
             return f"El campo '{field}' debe ser un string."
         if field == "promedio" and not isinstance(data[field], (int, float)):
             return f"El campo 'promedio' debe ser un número."
     return None
 
 def validate_profesor(data):
-    required_fields = ["id", "numeroEmpleado", "nombres", "apellidos", "horasClase"]
+    required_fields = ["numeroEmpleado", "nombres", "apellidos", "horasClase"]
     for field in required_fields:
         if field not in data or not data[field]:
             return f"El campo '{field}' es obligatorio y no puede estar vacío."
-        if field in ["id"] and not isinstance(data[field], int):
-            return f"El campo '{field}' debe ser un entero."
-        if field in ["nombres", "apellidos"] and not isinstance(data[field], str):
+        if field in ["nombres", "apellidos","password"] and not isinstance(data[field], str):
             return f"El campo '{field}' debe ser un string."
         if field in ["promedio","horasClase"] and not isinstance(data[field], (int, float)):
             return f"El campo 'promedio' debe ser un número."
@@ -104,7 +100,7 @@ class AlumnoResource(Resource):
     def post(self):
         data = request.get_json()
         error = validate_alumno(data)
-        if error:
+        if error != None:
             return {"error": error}, 400
         new_alumno = Alumno(**data)
         db.session.add(new_alumno)
@@ -114,7 +110,7 @@ class AlumnoResource(Resource):
     def put(self, id):
         data = request.get_json()
         error = validate_alumno(data)
-        if error:
+        if error != None:
             return {"error": error}, 400
         alumno = Alumno.query.get(id)
         if not alumno:
