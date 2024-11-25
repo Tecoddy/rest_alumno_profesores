@@ -124,7 +124,9 @@ class AlumnoResource(Resource):
         db.session.commit()
         return {"mensaje": "Alumno actualizado exitosamente"}, 200
 
-    def delete(self, id):
+    def delete(self, id = None):
+        if id is None:
+            return {"error": "No permitido"}, 405
         alumno = Alumno.query.get(id)
         if not alumno:
             return {"error": "Alumno no encontrado"}, 404
@@ -144,7 +146,7 @@ class ProfesorResource(Resource):
 
     def post(self):
         data = request.get_json()
-        error = validate_alumno(data)
+        error = validate_profesor(data)
         if error:
             return {"error": error}, 400
         new_profesor = Profesor(**data)
@@ -154,7 +156,7 @@ class ProfesorResource(Resource):
 
     def put(self, id):
         data = request.get_json()
-        error = validate_alumno(data)
+        error = validate_profesor(data)
         if error:
             return {"error": error}, 400
         profesor = Profesor.query.get(id)
@@ -165,7 +167,9 @@ class ProfesorResource(Resource):
         db.session.commit()
         return {"mensaje": "Profesor actualizado exitosamente"}, 200
 
-    def delete(self, id):
+    def delete(self, id = None):
+        if id is None:
+            return {"error": "No permitido"}, 405
         profesor = Profesor.query.get(id)
         if not profesor:
             return {"error": "Profesor no encontrado"}, 404
