@@ -15,7 +15,7 @@ app = Flask(__name__)
 api = Api(app)
 
 # EC2 instance DNS
-BASE_URL = "http://ec2-54-144-75-112.compute-1.amazonaws.com"
+BASE_URL = "http://ec2-34-238-156-80.compute-1.amazonaws.com"
 #Testing
 #BASE_URL = "http://127.0.0.1:5000"
 
