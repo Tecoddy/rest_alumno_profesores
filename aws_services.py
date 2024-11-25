@@ -8,15 +8,19 @@ import uuid
 
 # Configure AWS credentials
 session = boto3.session.Session(
-    aws_access_key_id="ASIASJGR52XF4FL44BYT",
-    aws_secret_access_key="/cnTNFOSL+uO0Q3jMW59b+bLOYpsX8hIXqwteABj",
-    aws_session_token="IQoJb3JpZ2luX2VjEGIaCXVzLXdlc3QtMiJGMEQCIAVeDN3uu0vKqWOa0TTrp2k1Gnq2vHH0J8DsAJDysKpfAiBZzQp+MLMSZVGKACyfWxTYkKoJhb3wrNJgQRoanhYclSqwAgj7//////////8BEAEaDDE1NzIwNjU2NjM0NyIMYEdaksVFcbkRIO2UKoQCyvielLy+ZrPnvEREpSRzq2sZfr0foExLTNB+sQZZ2yp3hbu+m8UNgdRIIdYSeX5KUOcy6jqJ7OOW1XGGtK8zMp402obo5ZoWXUzciR+hI1EjtQVbw0u7iMpYnViooMMjCc6kXx//qhFHWwXcOCEXUVzKCQP4mxZHHJ22BnmguaFFv+tHUpXXSE0DdyKzHfKCWaczkq7Z9pTwHJxF+01PwDqocc2A00JO0zvtagUvJi4aGz+gbbu7amBaM1QwZ0y+YJy37YVWI5WbV6d81vL5eFylZMy85ayVRqhHCpLrgpeaPYU89ZDc4nAJzy/Azsov3IQazrXn6GEN839kxmeG6+K5qhEwsaSPugY6ngGsWPk1X8E9seoi1K2nrB8R2vp1Kugo0ZyaJCl+5VsRI/j1m+wvqjBHxFzjbtId4ehFab2L/k7ID6JdZ//Bo13xmWJPfES2lUzQFRIG4MUoh1NIdIzPs68Y3o98GMhi8iKoTddd+kvTSPfdbYpIxxjaYle1v7YTJ9BjR3xLqTRYrDQbI2qTpZUzR1oUUZ6asUpG6tsITNul9PhAntXiPw==",
+    aws_access_key_id="ASIASJGR52XFXR54XEVR",
+    aws_secret_access_key="OEjcALbddyJvw8M2ERQWdS5oQGxvxAeE4zqjzufH",
+    aws_session_token="IQoJb3JpZ2luX2VjEHAaCXVzLXdlc3QtMiJHMEUCIQDaUJHhNwmYV7X0M5k8MS5XvCZ5IMdZYtZX2x1Ffr9KgQIgcV7z0woGe+iAj6OP3rciCCvq+OEsJM7IMThfnwpt7VoqpwIIGRABGgwxNTcyMDY1NjYzNDciDDNlnRS2JDYoQGGtiiqEAk+E8543Ra4SUsfwiGZiAMM/Ma6BPdG//NQGoi2vaidNsGzH8PNkhBnf76HnkTj62Uva/+kIiUnGw3e+sIpOTIVxgiA8sunschCf5CPfU9Xcx/Uyc9ZFWTmRa4sQVYjDFHdGfCUHHi1bseGzf7aGpSJeGih94sy3jX/abJrCm9hDMtBwRpY1AKLsqr5OtuCf5vbcJc+sBnt/rAPT8gI+wqREgvMmU7576EldqmWgZcoApaM5m3lh+HFgXXeZnPaIbBAdvvGKnx9DvljHmx1sGAZn/S1Yq/wVfgZjynYfGt9G6fLMI41yy0B1ASPONK7GTJdJRV5ahK/ykcVe2egDzsRXwr+KMOW3kroGOp0BAaVgkjXa8zt7yRepCVu3xL9BcadFQKmH17PZwCdfxKDpqdsWVI/lUsBjRIZ6Do4ObpzxM6eDddnFoQDP1/X29T+h9GZ6uVVbjtQi2A3XlvldsNd7hvz/JUbDLxWJrSGZR/E3HHGTjEB9OT/h0V/OWvueAAcIVHEboWqpknCdUFlY1AfcYdUtDcKU0zLHCEqxTcjA4pnDH5Fda36Dbg==",
     region_name='us-east-1'  # Replace with your region
     )
 s3 = session.client('s3')
 
 # DynamoDB Client
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')  # Change region if needed
+dynamodb = boto3.resource('dynamodb', 
+    aws_access_key_id="ASIASJGR52XFXR54XEVR",
+    aws_secret_access_key="OEjcALbddyJvw8M2ERQWdS5oQGxvxAeE4zqjzufH",
+    aws_session_token="IQoJb3JpZ2luX2VjEHAaCXVzLXdlc3QtMiJHMEUCIQDaUJHhNwmYV7X0M5k8MS5XvCZ5IMdZYtZX2x1Ffr9KgQIgcV7z0woGe+iAj6OP3rciCCvq+OEsJM7IMThfnwpt7VoqpwIIGRABGgwxNTcyMDY1NjYzNDciDDNlnRS2JDYoQGGtiiqEAk+E8543Ra4SUsfwiGZiAMM/Ma6BPdG//NQGoi2vaidNsGzH8PNkhBnf76HnkTj62Uva/+kIiUnGw3e+sIpOTIVxgiA8sunschCf5CPfU9Xcx/Uyc9ZFWTmRa4sQVYjDFHdGfCUHHi1bseGzf7aGpSJeGih94sy3jX/abJrCm9hDMtBwRpY1AKLsqr5OtuCf5vbcJc+sBnt/rAPT8gI+wqREgvMmU7576EldqmWgZcoApaM5m3lh+HFgXXeZnPaIbBAdvvGKnx9DvljHmx1sGAZn/S1Yq/wVfgZjynYfGt9G6fLMI41yy0B1ASPONK7GTJdJRV5ahK/ykcVe2egDzsRXwr+KMOW3kroGOp0BAaVgkjXa8zt7yRepCVu3xL9BcadFQKmH17PZwCdfxKDpqdsWVI/lUsBjRIZ6Do4ObpzxM6eDddnFoQDP1/X29T+h9GZ6uVVbjtQi2A3XlvldsNd7hvz/JUbDLxWJrSGZR/E3HHGTjEB9OT/h0V/OWvueAAcIVHEboWqpknCdUFlY1AfcYdUtDcKU0zLHCEqxTcjA4pnDH5Fda36Dbg==",
+    region_name='us-east-1')  # Change region if needed
 sessions_table = dynamodb.Table('sesiones-alumnos')
 
 bucket_name = 'alumnos-fotos'

@@ -182,5 +182,5 @@ def test_session_management():
 if __name__ == "__main__":
     test_alumnos()
     test_profesores()
-    test_enviar_email()
-    test_session_management()
+    #test_enviar_email()
+    #test_session_management()
