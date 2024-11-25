@@ -1,2 +1,6 @@
 Flask
 flask-restful
+flask-sqlalchemy
+boto3
+PyMySQL
+bcrypt
