@@ -32,12 +32,12 @@ def reset_database():
         print(f"Error resetting database: {e}")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python clean_db.py <base_url> <action>")
+    if len(sys.argv) != 2:
+        print("Usage: python clean_db.py <action>")
         print("Actions: clean or reset")
         sys.exit(1)
 
-    action = sys.argv[2].lower()
+    action = sys.argv[1].lower()
 
     if action == "clean":
         clean_database()
