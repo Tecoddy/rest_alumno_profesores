@@ -105,7 +105,7 @@ class AlumnoResource(Resource):
         new_alumno = Alumno(**data)
         db.session.add(new_alumno)
         db.session.commit()
-        return {"mensaje": "Alumno creado exitosamente", "id": new_alumno.id}, 201
+        return {"mensaje": "Alumno creado exitosamente", "id": str(new_alumno.id)}, 201
 
     def put(self, id):
         data = request.get_json()
@@ -135,7 +135,7 @@ class ProfesorResource(Resource):
         if id is None:
             profesores = Profesor.query.all()
             return jsonify([{"id": p.id, "numeroEmpleado": p.numeroEmpleado, "nombres": p.nombres, "apellidos": p.apellidos, "horasClase": p.horasClase} for p in profesores])
-        profesor = Profesor.query.get(id)
+        profesor = Profesor.query.get(str(id))
         if profesor:
             return {"id": profesor.id, "numeroEmpleado": profesor.numeroEmpleado, "nombres": profesor.nombres, "apellidos": profesor.apellidos, "horasClase": profesor.horasClase}, 200
         return {"error": "Profesor no encontrado"}, 404
@@ -148,7 +148,7 @@ class ProfesorResource(Resource):
         new_profesor = Profesor(**data)
         db.session.add(new_profesor)
         db.session.commit()
-        return {"mensaje": "Profesor creado exitosamente", "id": new_profesor.id}, 201
+        return {"mensaje": "Profesor creado exitosamente", "id": str(new_profesor.id)}, 201
 
     def put(self, id):
         data = request.get_json()
